@@ -1,0 +1,223 @@
+﻿@model AGC_CHURCH.Models.User
+
+@{
+    ViewData["Title"] = "Phone";
+ 
+}
+<div style="background-color:ghostwhite;padding:24px">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .first {
+            background-color: green;
+            border-radius: 50%;
+        }
+
+        .settings:hover {
+            font-size: x-large;
+        }
+
+        .second {
+            background-color: orange;
+            border-radius: 50%;
+        }
+
+        .third {
+            background-color: blue;
+            border-radius: 50%;
+        }
+
+        .fourth {
+            background-color: deeppink;
+            border-radius: 50%;
+        }
+
+        .fifth {
+            background-color: gray;
+            border-radius: 50%;
+        }
+
+        .sidenav {
+            padding-top: 0;
+            height: auto;
+            min-height: 100%;
+            width: 0px;
+            border-radius: 8PX;
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0.5,0.5);
+            background-color: #111;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: small;
+                color: white;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    background-color: #0194D6;
+                    color: white;
+                    height: 50px;
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0.1,0.1);
+                }
+
+        .zoom {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0.1,0.1);
+            height: 450px;
+            transition: transform .5s;
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                background-color: #f7fdff;
+                box-shadow: 0 0 3px 0 rgba(0,0,0.1,0.1);
+                -ms-transform: scale(1.5);
+                -webkit-transform: scale(1.5);
+                transform: scale(0.95);
+            }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+
+        #main {
+            transition: margin-left .5s;
+            width: 100%;
+        }
+    </style>
+
+    <div class="row">
+        <div class=" col-xl-4 col-lg-4 col-md-1 col-sm-1  " style="padding-left:24px;padding-right:24px">
+
+            <form asp-action="Create" id="SignUp">
+                <input type="hidden" asp-for="id" id="id" class="form-control" />
+                <input type="hidden" asp-for="Name" id="Name" class="form-control" />
+                <input type="hidden" asp-for="Email" id="Email" class="form-control" />
+                <input type="hidden" asp-for="Phone" id="Phone" class="form-control" />
+                <input type="hidden" asp-for="ImageUrl" id="ImageUrl" class="form-control" />
+                <input type="hidden" asp-for="provider" id="provider" class="form-control" />
+                <input type="hidden" asp-for="Role" id="Role" class="form-control" />
+            </form>
+        </div>
+
+        <div style="margin-top:8px;border-radius:8px; padding:8px; " class="col-xl-4 col-lg-4 col-md-10 col-sm-10 col-12   ">
+
+            <div style="margin-top:24px;">
+                <div>
+                    @*<div class=" text-center ">
+                            <img src="~/Icons/avatar5.png" style="width:72px;margin-top:8px ;height:72px;border-radius:50%" class="img-circle" alt="User Image">
+                        </div>*@
+                    <div style="text-align:center;margin:16px">
+                        <img src="/Icons/ProfilePic.png" style="width:50px;height:50px" />
+                    </div>
+                    <div class="text-center  " style="font-family:'Century Gothic';font-size:large">Find Places </div>
+                </div>
+
+                <div id="firebaseui-auth-container"></div>
+
+
+
+                <div style="margin:24px">
+                    <div class="row">
+                        <div class="col-6">
+                            <div style="text-align:left;font-size:small;color:gray;margin-top:16px">
+                                Don't have an account? <a asp-action="IndexForRegistration" asp-controller="Universities"> Sign Up</a>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div style="text-align:left;font-size:small;color:gray;margin-top:16px">
+                                <a asp-action="Index" asp-controller="Users"> Use another way</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="col-xl-4 col-lg-4 col-md-1 col-sm-1  "></div>
+    </div>
+
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.css" />
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+
+
+<script src="~/js/SignUp.js"></script>
+
+
+<script>
+    var uiConfig = {
+        callbacks: {
+            signInSuccessWithAuthResult: function (authResult) {
+                 $("#id").val(authResult.user.uid);
+                $("#Name").val("kili");
+                $("#Email").val("eee@gmail");
+                 $("#Phone").val(authResult.user.phoneNumber);
+                $("#ImageUrl").val("image");
+                $("#provider").val(authResult.additionalUserInfo.providerId);
+                $("#Role").val("User");
+                document.getElementById("SignUp").submit();
+            },
+
+            signInFailure: function (error) {
+                console.log("Error")
+            },
+
+            uiShown: function () {
+
+                document.getElementById('loader').style.display = 'none';
+            }
+        },
+        signInFlow: 'popup',
+        
+        signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+           // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          //  firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+         //   firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+          
+          ////  firebase.auth.GithubAuthProvider.PROVIDER_ID,
+          //  firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            firebase.auth.PhoneAuthProvider.PROVIDER_ID
+          //  firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+        ],
+        // tosUrl and privacyPolicyUrl accept either url string or a callback
+        // function.
+        // Terms of service url/callback.
+        tosUrl: '<your-tos-url>',
+        // Privacy policy url/callback.
+        privacyPolicyUrl: function () {
+            window.location.assign('<your-privacy-policy-url>');
+        }
+    };
+
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+</script>

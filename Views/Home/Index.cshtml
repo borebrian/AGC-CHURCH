@@ -1,0 +1,442 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<body onload="modal()">
+
+
+    <div style="background-image:url(/Icons/cytonn-photography-GJao3ZTX9gU-unsplash@2x.png);background-size:cover;background-repeat:no-repeat;background-attachment:fixed; height:auto;width:100%; background-position:center center;">
+        <div class="container text-center">
+            <style>
+                * {
+                }
+
+                .zoom {
+                    padding: 50px;
+                    transition: transform .2s;
+                    margin: 0 auto;
+                }
+
+                    .zoom:hover {
+                        -ms-transform: scale(1.5); /* IE 9 */
+                        -webkit-transform: scale(1.5); /* Safari 3-8 */
+                        transform: scale(0.95);
+                    }
+            </style>
+
+
+            <div class="container">
+                <div class="row">
+
+                    <div class=" col-sm-6  zoom" style="height:auto;padding:8px;box-shadow:2px ,2px,2px,2px ,black;">
+                        <div data-toggle="modal" data-target="#User_Information">
+                            <div class="img-thumbnail " style="height:200px;background-color:white;">
+                                <div style="margin-top:24px">
+                                    <h2>@ViewBag.Usersss</h2>
+                                </div>
+                                <div style="margin-top:24PX;color:black">
+                                    <h4>Users</h4>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6  zoom" style="height:auto;padding:8px">
+                        <div data-toggle="modal" data-target="#Notifications">
+                            <div class="img-thumbnail " style="height:200px;background-color:white;">
+                                <div style="margin-top:24px">
+                                    <h2>@ViewBag.Note</h2>
+                                </div>
+                                <div style="margin-top:24PX;color:black">
+                                    <h4>Notifications</h4>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6  zoom" style="height:auto;padding:8px">
+                        <div data-toggle="modal" data-target="#Branches">
+                            <div class="img-thumbnail " style="height:200px;background-color:white;">
+                                <div style="margin-top:24px">
+                                    <h2>@ViewBag.branchesss</h2>
+                                </div>
+                                <div style="margin-top:24PX;color:black">
+                                    <h4>Branches</h4>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6  zoom" style="height:auto;padding:8px">
+                        <div data-toggle="modal" data-target="#GeneralInfo">
+                            <div class="img-thumbnail " style="height:200px;background-color:white;">
+                                <div style="margin-top:24px">
+                                    <span><img src="~/Img/infor.png" style="width:24px;width24px" /></span>
+                                </div>
+                                <div style="margin-top:24PX;color:black">
+                                    <h4>General Information</h4>
+                                </div>
+                                <div style="margin-top:24px">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script>
+        $(function () {
+            $('#myTab li:last-child a').tab('show')
+        })
+    </script>
+
+
+    <input type="hidden" id="existing" value="@ViewBag.exist" />
+
+    <script>
+        function modal() {
+            var x = $("#existing").val();
+            if (x == "null") {
+                $('#exampleModal1').modal('show');
+            }
+
+        };
+    </script>
+
+    <div class="modal fade" id="exampleModal1" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#921c37;color:white">
+                    <h5 class="modal-title" id="exampleModalLabel">Please provide some information to finalise your Registration</h5>
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form asp-action="notbabtised" asp-controller="Home">
+                    <div class="modal-body" style="background-color:white;color:white;text-align:center">
+                        <div>
+                            @*<div class=" text-center ">
+                                    <img src="~/Icons/avatar5.png" style="width:72px;margin-top:8px ;height:72px;border-radius:50%" class="img-circle" alt="User Image">
+                                </div>*@
+                            <div style="text-align:center">
+                                <img src="/Icons/ProfilePic.png" style="width:50px;height:50px" />
+                            </div>
+                            <div class="text-center " style="font-family:'Century Gothic';font-size:large">login </div>
+                        </div>
+                        <div class="card-body" style="color:black;text-align:left">
+                            <div>
+                                Gender:
+                                <select name="Gender" class="form-control" asp-items="ViewBag.gender"></select>
+                            </div>
+                            <div style="padding-top:20px;"></div>
+                            <div>
+                                Agpo:
+                                <select name="AGPO" class="form-control" asp-items="ViewBag.category"></select>
+                            </div>
+                            <div style="padding-top:20px;"></div>
+                            <div>
+                                Branch:
+                                <select name="branch" class="form-control" asp-items="ViewBag.branches"></select>
+                            </div>
+                            <div style="padding-top:20px;"></div>
+                            <div>
+                                Phone :
+                                <input type="text" name="phone" placeholder="+25479*******" class="form-control" />
+                            </div>
+
+                            @*<div style="padding:8px;color:gray;font-size:small">
+                                    Have you beeen babtised?...
+                                </div>*@
+                        </div>
+                    </div>
+
+                    <div class="card-footer" style="background-color:#fcfafa;color:white">
+                        <div class="row">
+                            <div class="col-6 text-center"><button type="submit" style="background-color:#921c37;color:white;border-radius:8px" class="btn ">Submit</button></div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Modal For User Information-->
+    <div class="modal fade modal-xl" id="User_Information" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#921c37;color:white">
+                    <h5 class="modal-title" id="exampleModalLabel">Users</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="background-color:white;color:black;text-align:center">
+                    You can search the users with the following options..
+                    <div style="margin-top:24px">
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                        {
+                            <table>
+                                <tr>
+                                    <td>
+                                        Member category
+                                        <input type="text" placeholder="category" name="category" class="form-control" />
+                                    </td>
+                                    <td>
+                                        church branch
+                                        <input type="text" placeholder="Branc" name="branch" class="form-control" />
+                                    </td>
+                                    <td>
+                                        babtised?
+                                        <input type="text" placeholder="true or false" name="babtised" class="form-control" />
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-success">Search</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
+                    <div style="margin-top:24px">
+                        <table class="table table-responsive table-striped">
+                            <tr>
+                                <td>
+                                    Name
+                                </td>
+                                <td>
+                                    Category
+                                </td>
+                                <td>
+                                    Branc
+                                </td>
+                                <td>Phone</td>
+                                <td>Role</td>
+                            </tr>
+                            @foreach (var item in ViewBag.Users)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Name
+                                    </td>
+                                    <td>
+                                        @item.Category
+                                    </td>
+                                    <td>
+                                        @item.ChurchBranch
+                                    </td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Role</td>
+                                </tr>
+
+                            }
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="card-footer" style="background-color:white;color:gray">
+                    Curch Moto ama anything
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal For  Notifications-->
+    <div class="modal fade" id="Notifications" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#921c37;color:white">
+                    <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                <div class="modal-body" style="background-color:white;color:black;text-align:center">
+                    <button data-toggle="modal" data-dismiss="modal" data-target="#Add_Notifications">Add new Notification</button>
+
+                    <div style="margin-top:24px">
+                        <table class="table table-responsive table-striped">
+                            <tr>
+                                <td>Title</td>
+                                <td>
+                                    Notifications
+                                </td>
+                                <td>Time</td>
+                                <td></td>
+                            </tr>
+                            @foreach (var itemmm in ViewBag.Notifications)
+                            {
+                                <tr>
+                                    <td>@itemmm.Title</td>
+                                    <td>
+                                        @itemmm.Notification
+                                    </td>
+                                    <td>@itemmm.Timestamp</td>
+                                    <td>
+                                        <a asp-controller="Home" asp-action="AllNotifications" asp-route-Id="@itemmm.id" class="btn btn-danger btn-sm" style="color:white">remove</a>
+                                    </td>
+                                </tr>
+
+                            }
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="card-footer" style="background-color:#fcfafa;color:white">
+                    <div class="row">
+                        <div class="col-6 text-center"><button type="submit" style="background-color:#921c37;color:white;border-radius:8px" class="btn ">Submit</button></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Modal For  Branches-->
+    <div class="modal fade" id="Branches" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#921c37;color:white">
+                    <h5 class="modal-title" id="exampleModalLabel">Branches</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                <div class="modal-body" style="background-color:white;color:black;text-align:center">
+                    <button data-toggle="modal" data-dismiss="modal" data-target="#Add_Branches">Add new branch</button>
+
+                    <div style="margin-top:24px">
+                        <table class="table table-responsive table-striped">
+                            <tr>
+                                <td>
+                                    Church Branch
+                                </td>
+                                <td></td>
+                            </tr>
+                            @foreach (var itemmm in ViewBag.AllBranches)
+                            {
+                                <tr>
+                                    <td>
+                                        @itemmm.Branc
+                                    </td>
+
+                                    <td>
+                                        <a asp-controller="Home" asp-action="Delete" asp-route-Id="@itemmm.id" class="btn btn-danger btn-sm" style="color:white">remove</a>
+                                    </td>
+                                </tr>
+
+                            }
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="card-footer" style="background-color:white;color:gray">
+                    Curch Moto ama anything
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal For General Information-->
+    <div class="modal fade" id="GeneralInfo" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#921c37;color:white">
+                    <h5 class="modal-title" id="exampleModalLabel">General Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="background-color:white;color:white;text-align:center">
+                    Users.....
+                </div>
+
+                <div class="card-footer" style="background-color:#fcfafa;color:white">
+                    <div class="row">
+                        <div class="col-6 text-center"><button type="submit" style="background-color:#921c37;color:white;border-radius:8px" class="btn ">Submit</button></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Modal For Adding Bramches-->
+    <div class="modal fade" id="Add_Branches" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#921c37;color:white">
+                    <h5 class="modal-title" id="exampleModalLabel"> Add Branches</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                <form asp-action="addbanch" asp-controller="Home">
+                    <div class="modal-body" style="background-color:white;color:black;text-align:center">
+
+                        Enter Branch name
+                        <br />
+                        <input type="text" name="new_branch" class="form-control" placeholder="Add new Banch" />
+
+                    </div>
+
+                    <div class="card-footer" style="background-color:white;color:gray">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal For Adding Notification-->
+    <div class="modal fade" id="Add_Notifications" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#921c37;color:white">
+                    <h5 class="modal-title" id="exampleModalLabel"> Add notifications</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                <form asp-action="addnote" asp-controller="Home">
+                    <div class="modal-body" style="background-color:white;color:black;text-align:center">
+                        <br />
+                        Enter Title
+                        <input type="text" name="Title" class="form-control" placeholder="Title" />
+                        <br />
+                        Enter Notification
+                        <br />
+                        <input type="text" name="new_notification" class="form-control" placeholder="Add new notice" />
+                        <input type="hidden" name="time" value="@DateTime.Now" class="form-control" placeholder="Add new notice" />
+
+
+                    </div>
+
+                    <div class="card-footer" style="background-color:white;color:gray">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

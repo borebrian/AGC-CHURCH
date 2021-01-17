@@ -1,0 +1,560 @@
+﻿@model AGC_CHURCH.Models.User
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+<div style="background-color:ghostwhite;padding:24px">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .first {
+            background-color: green;
+            border-radius: 50%;
+        }
+
+        .settings:hover {
+            font-size: x-large;
+        }
+
+        .second {
+            background-color: orange;
+            border-radius: 50%;
+        }
+
+        .third {
+            background-color: blue;
+            border-radius: 50%;
+        }
+
+        .fourth {
+            background-color: deeppink;
+            border-radius: 50%;
+        }
+
+        .fifth {
+            background-color: gray;
+            border-radius: 50%;
+        }
+
+        .sidenav {
+            padding-top: 0;
+            height: auto;
+            min-height: 100%;
+            width: 0px;
+            border-radius: 8PX;
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0.5,0.5);
+            background-color: #111;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: small;
+                color: white;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    background-color: #0194D6;
+                    color: white;
+                    height: 50px;
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0.1,0.1);
+                }
+
+        .zoom {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0.1,0.1);
+            height: 450px;
+            transition: transform .5s;
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                background-color: #f7fdff;
+                box-shadow: 0 0 3px 0 rgba(0,0,0.1,0.1);
+                -ms-transform: scale(1.5);
+                -webkit-transform: scale(1.5);
+                transform: scale(0.95);
+            }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+
+        #main {
+            transition: margin-left .5s;
+            width: 100%;
+        }
+    </style>
+
+    <div class="row">
+        <div class=" col-xl-4 col-lg-4 col-md-1 col-sm-1  " style="padding-left:24px;padding-right:24px">
+            <div class="col-md-4">
+                <form asp-action="Create" id="SignUp">
+                    <input type="hidden" asp-for="id" id="id" class="form-control" />
+                    <input type="hidden" asp-for="Name" id="Name" class="form-control" />
+                    <input type="hidden" asp-for="Email" id="Email" class="form-control" />
+                    <input type="hidden" asp-for="Phone" id="Phone" class="form-control" />
+                    <input type="hidden" asp-for="ImageUrl" id="ImageUrl" class="form-control" />
+                    <input type="hidden" asp-for="provider" id="provider" class="form-control" />
+                    <input type="hidden" asp-for="Role" id="Role" class="form-control" />
+                    <input type="hidden" asp-for="Gender" id="Gender" class="form-control" />
+                    <input type="hidden" asp-for="Category" id="Category" class="form-control" />
+                    <input type="hidden" asp-for="ChurchBranch" id="ChurchBranch" class="form-control" />
+                    <input type="hidden" asp-for="BabtismStatus" id="BabtismStatus" class="form-control" />
+                </form>
+            </div>
+        </div>
+
+        <div style="margin-top:8px;border-radius:8px;background-color:white; padding:8px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="col-xl-4 col-lg-4 col-md-10 col-sm-10 col-12   ">
+
+            <div style="margin-top:24px;">
+                <div>
+                    @*<div class=" text-center ">
+                            <img src="~/Icons/avatar5.png" style="width:72px;margin-top:8px ;height:72px;border-radius:50%" class="img-circle" alt="User Image">
+                        </div>*@
+                    <div style="text-align:center">
+                        <img src="/Icons/ProfilePic.png" style="width:50px;height:50px" />
+                    </div>
+                    <div class="text-center " style="font-family:'Century Gothic';font-size:large">login </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <input type="text" placeholder="Email" id="email" class="form-control" style="background-color:ghostwhite" />
+                    </div>
+                    <div style="padding-top:20px;"></div>
+                    <div>
+                        <input type="password" placeholder="Password" id="password" class="form-control" style="background-color:ghostwhite" />
+                    </div>
+                </div>
+
+                <div>
+
+                    <div style=" margin:8px;">
+
+                        <div style="padding-top:20px;">
+                            <input style="width:100%;background-color:black;color:#f3f3f3;text-decoration:solid; box-shadow: 0 4px 8px 0 rgba(0,0,0.1,0.1);" class="btn " type="submit" onclick="Emailpassword()" value="Login" />
+                        </div>
+                    </div>
+                    <div style="margin:24px">
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                    <label class="custom-control-label" for="defaultUnchecked">Remember Me</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <a asp-action="" asp-controller="">  Forgot Password</a>
+
+                            </div>
+                        </div>
+                        <p></p>
+
+
+                        <div class="row">
+                            <div class="col-4 p-2">
+                                <div style="border-bottom:1px solid gray"> </div>
+                            </div>
+                            <div class="col-4" style="text-align:center;font-size:small;color:gray">
+                                or continue with
+                            </div>
+                            <div class="col-4 p-2">
+                                <div style="border-bottom:1px solid gray"> </div>
+                            </div>
+                        </div>
+                        <p></p>
+                        <button onclick="googleSignin()" class="form-control" style=" box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)">
+                            <svg aria-hidden="true" class="native svg-icon iconGoogle" width="18" height="18" viewBox="0 0 18 18"><path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 002.38-5.88c0-.57-.05-.66-.15-1.18z" fill="#4285F4"></path><path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 01-7.18-2.54H1.83v2.07A8 8 0 008.98 17z" fill="#34A853"></path><path d="M4.5 10.52a4.8 4.8 0 010-3.04V5.41H1.83a8 8 0 000 7.18l2.67-2.07z" fill="#FBBC05"></path><path d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 001.83 5.4L4.5 7.49a4.77 4.77 0 014.48-3.3z" fill="#EA4335"></path></svg>
+                            Log in with Google
+                        </button>
+                        <br />
+                        <button data-toggle="modal" data-target="#exampleModal" class="form-control" style=" box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);background-color:forestgreen;color:white">
+                            Log in with Phone
+                        </button>
+                        <div style="margin:24px">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div style="text-align:right;font-size:small;color:gray;margin-top:16px">
+                                        <img src="/Icons/facebook.png" onclick="facebookSignin()" style="width: 30px;height: 30px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);border-radius: 100%" />
+
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div style="text-align:left;font-size:small;color:gray;margin-top:16px">
+                                        <img src="/Icons/twitter.png" onclick="twitterSignin()" style="width: 30px;height: 30px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);border-radius: 100%" />
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align:left;font-size:small;color:gray;margin-top:16px">
+                            Don't have an account? <strong data-toggle="modal" data-target="#reg">Sign Up</strong>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div><!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <h1>Enter number to create account</h1>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <input type="text" placeholder="Username" name="username" id="username" class="form-control" style="background-color:ghostwhite" />
+                </div>
+                <div style="padding-top:20px;"></div>
+                <div>
+                    <input type="text" placeholder="+254********" id="number" class="form-control" style="background-color:ghostwhite" />
+                </div>
+                <div style="padding-top:20px;"></div>
+                <div id="recaptcha-container"></div>
+
+            </div>
+            <div class="modal-footer">
+                <button onclick="phoneAuth();" class="btn btn-primary">Send Code</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <h1>Enter number code</h1>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" required placeholder="code" id="verificationCode" class="form-control" />
+
+            </div>
+            <div class="modal-footer">
+                <button onclick="codeverify();" class="btn btn-primary">Send Code</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="reg" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <h1>email pass reg</h1>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <input type="text" placeholder="Username" name="username" id="emailreg" class="form-control" style="background-color:ghostwhite" />
+                </div>
+                <div style="padding-top:20px;"></div>
+                <div>
+                    <input type="password" placeholder="password" id="passreg" class="form-control" style="background-color:ghostwhite" />
+                </div>
+                <div style="padding-top:20px;"></div>
+                <div id="recaptcha-container"></div>
+
+            </div>
+            <div class="modal-footer">
+                <button onclick="registration();" class="btn btn-primary">Create account</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+
+
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyBf4G1O5u3P-jXJKJT0T2GlzCFmUy2TNgI",
+        authDomain: "test-76ca1.firebaseapp.com",
+        projectId: "test-76ca1",
+        appId: "1:1057093891852:web:5ec511e829efb95beb7b29",
+        measurementId: "G-PFHKCKX7L4"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+
+    const auth = firebase.auth();
+    //...............Email auth
+    function Emailpassword() {
+        $(document).ready(function () {
+            var email = $("#emailForLogin").val();
+            var password = $("#password").val();
+            if (email != "") {
+                $("#progress").modal("show");
+                firebase.auth().signInWithEmailAndPassword(email, password)
+                    .then((result) => {
+                        $("#id").val(result.user.uid);
+                        $("#Name").val("null");
+                        $("#Email").val(result.user.email);
+                        $("#Phone").val("null");
+                        $("#ImageUrl").val("null");
+                        $("#provider").val(result.additionalUserInfo.providerId);
+                        $("#Role").val("User");
+                        $("#Gender").val("null");
+                        $("#Category").val("nll");
+                        $("#ChurchBranch").val("null");
+                        $("#BabtismStatus").val("null");
+                        document.getElementById("SignUp").submit();
+                    })
+
+                    .catch((error) => {
+                        // $("#progress").modal("hide");
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        alert(errorMessage);
+                        $("#progress").modal("hide");
+                    });
+            } else {
+                $("#progress").modal("hide")
+                alert("Email Or password fields cannot be empty!! ");
+
+            }
+
+
+        });
+    }
+
+    //............registration with email password
+
+    function registration() {
+        var email = document.getElementById('emailreg').value;
+        var password = document.getElementById('passreg').value;
+        if (email != "") {
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((user) => {
+                    alert("Account Created Successfully..You can now login to your account");
+                    $("#reg").modal("hide");
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorMessage)
+                });
+        } else {
+            alert("Email Or password fields cannot be empty!! ");
+        }
+    }
+    //-----------phone auth
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    recaptchaVerifier.render();
+    function phoneAuth() {
+        //get the number
+        var number = document.getElementById('number').value;
+        var username = document.getElementById('username').value;
+
+        if (number != "" || username != "") {
+
+            auth.signInWithPhoneNumber(number, window.recaptchaVerifier).then(function (confirmationResult) {
+                //s is in lowercase
+                window.confirmationResult = confirmationResult;
+                coderesult = confirmationResult;
+                // alert(coderesult);
+                $('#exampleModal').modal('hide');
+                $('#exampleModal1').modal('show');
+            }).catch(function (error) {
+                alert(error.message);
+            });
+        } else {
+            alert("Username and phone number cannot be null");
+        }
+    }
+    function codeverify() {
+        var code = document.getElementById('verificationCode').value;
+        var username = document.getElementById('username').value;
+        if (code != "") {
+            $("#progress").modal("show");
+            coderesult.confirm(code).then(function (result) {
+
+                $("#id").val(result.user.uid);
+                $("#Name").val(username);
+                $("#Email").val("null");
+                $("#Phone").val(result.user.phoneNumber);
+                $("#ImageUrl").val("null");
+                $("#provider").val(result.additionalUserInfo.providerId);
+                $("#Role").val("User");
+                $("#Gender").val("null");
+                $("#Category").val("nll");
+                $("#ChurchBranch").val("null");
+                $("#BabtismStatus").val("null");
+                document.getElementById("SignUp").submit();
+            }).catch(function (error) {
+                alert(error.message);
+            });
+        } else {
+            alert("Please enter the Varification Code.")
+        }
+    }
+    //-------------google
+    googleSignin = () => {
+        $("#progress").modal("show");
+        base_provider = new firebase.auth.GoogleAuthProvider()
+        firebase.auth().signInWithPopup(base_provider).then(function (result) {
+            $("#id").val(result.user.uid);
+            $("#Name").val(result.user.displayName);
+            $("#Email").val(result.user.email);
+            $("#Phone").val("null");
+            $("#ImageUrl").val(result.user.photoURL);
+            $("#provider").val(result.additionalUserInfo.providerId);
+            $("#Role").val("User");
+            $("#Gender").val("null");
+            $("#Category").val("nll");
+            $("#ChurchBranch").val("null");
+            $("#BabtismStatus").val("null");
+            document.getElementById("SignUp").submit();
+
+        }).catch(function (err) {
+            // console.log(err)
+            // console.log("Failed to do")
+            alert(err);
+            $("#progress").modal("hide");
+        })
+    }
+    //--------------facebook
+    facebookSignin = () => {
+        $("#progress").modal("show");
+        base_provider = new firebase.auth.FacebookAuthProvider()
+        firebase.auth().signInWithPopup(base_provider).then(function (result) {
+            $("#id").val(result.user.uid);
+            $("#Name").val(result.user.displayName);
+            if (result.user.email == null) {
+                $("#Email").val("null");
+
+            } else {
+                $("#Email").val(result.user.email);
+            }
+            if (result.user.phoneNumber == null) {
+                $("#Phone").val("null");
+            } else {
+                $("#Phone").val(result.user.phoneNumber);
+            }
+            $("#ImageUrl").val(result.user.photoURL);
+            $("#provider").val(result.additionalUserInfo.providerId);
+            $("#Role").val("User");
+            $("#Gender").val("null");
+            $("#Category").val("nll");
+            $("#ChurchBranch").val("null");
+            $("#BabtismStatus").val("null");
+            document.getElementById("SignUp").submit();
+            // console.log(result.user)
+        }).catch(function (err) {
+            console.log(err)
+            console.log("Failed to do")
+            alert(err)
+            $("#progress").modal("hide");
+        })
+    }
+    //-------------twittter
+    twitterSignin = () => {
+        $("#progress").modal("show");
+        base_provider = new firebase.auth.TwitterAuthProvider()
+        firebase.auth().signInWithPopup(base_provider).then(function (result) {
+
+            $("#id").val(result.user.uid);
+            $("#Name").val(result.user.displayName);
+            if (result.user.email == null) {
+                $("#Email").val("null");
+
+            } else {
+                $("#Email").val(result.user.email);
+            }
+            if (result.user.phoneNumber == null) {
+                $("#Phone").val("null");
+            } else {
+                $("#Phone").val(result.user.phoneNumber);
+            }
+            $("#ImageUrl").val(result.user.photoURL);
+            $("#provider").val(result.additionalUserInfo.providerId);
+            $("#Role").val("User");
+            $("#Gender").val("null");
+            $("#Category").val("nll");
+            $("#ChurchBranch").val("null");
+            $("#BabtismStatus").val("null");
+            document.getElementById("SignUp").submit();
+            // console.log(result.user);
+
+            // var ff = new firebase.auth.FacebookAuthProvider();
+
+            // auth.currentUser.linkWithPopup(ff).then(function (result) {
+            // Accounts successfully linked.
+            // var credential = result.credential;
+            //  var user = result.user;
+            // ...
+            // console.log("success")
+            //  }).catch(function (error) {
+            //  console.log(error)
+            //  });
+
+        }).catch(function (err) {
+            console.log(err)
+            console.log("Failed to do")
+            alert(err)
+            $("#progress").modal("hide");
+        })
+    }
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="progress">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <img src="~/Gif/search.gif" style="max-height:250px;max-width:200px" />
+                Loading..
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
